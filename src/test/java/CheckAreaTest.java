@@ -1,14 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class CheckAreaTest {
     private static double r;
@@ -19,21 +12,11 @@ public class CheckAreaTest {
         checkArea = new CheckArea();
     }
 
-    static Stream<Arguments> radiusParam() {
-        return Stream.of(
-                arguments(1.0),
-                arguments(1.5),
-                arguments(2.0),
-                arguments(2.5),
-                arguments(3.0)
-        );
-    }
-
     //rectangle//
-    @MethodSource("radiusParam")
-    @ParameterizedTest
-    public void rectangleBorderUpRightTrue(double r) {
+    @Test
+    public void rectangleBorderUpRightTrue() {
         double  x  = 0;
+        r = 1.0;
         double y = r;
         assertTrue(checkArea.getHit(x, y, r));
     }
