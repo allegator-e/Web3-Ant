@@ -46,11 +46,16 @@ public class CheckArea {
     }
 
     public void newPoint(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
         Point p = new Point(getX(), getY(), getR(), getHit(this.x, this.y, this.r), LocalTime.now(), (System.nanoTime() - startTime));
         setPoint(p);
-        session.save(p);
-        session.getTransaction().commit();
+    }
+
+    public void deletePoint(int index) {
+        Point p = getPoints().get(index-1);
+        getPoints().remove(p);
+    }
+
+    public void clearPoints() {
+        points.clear();
     }
 }

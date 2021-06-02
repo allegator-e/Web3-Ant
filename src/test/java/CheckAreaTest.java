@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CheckAreaTest {
-    private static double r;
+    private static double r = 1.0;
     private static CheckArea checkArea;
 
     @Before
@@ -22,7 +22,7 @@ public class CheckAreaTest {
     }
 
     @Test
-   public void rectangleBorderUpRightFalse() {
+    public void rectangleBorderUpRightFalse() {
         double x = 1;
         r = 1.0;
         double y = r;
@@ -75,7 +75,7 @@ public class CheckAreaTest {
         assertFalse(checkArea.getHit(x, y, r));
     }
 
-        //triangle//
+    //triangle//
 
     @Test
     public void triangleBorderDownLeftTrue() {
@@ -170,5 +170,68 @@ public class CheckAreaTest {
         double y = 0 - 0.00001;
         assertFalse(checkArea.getHit(x, y, r));
     }
+
+    //доп тесты
+
+    @Test
+    public void circleMediumTrue() {
+        double x = r * 0.25;
+        r = 1.0;
+        double y = -r * 0.25;
+        assertTrue(checkArea.getHit(x, y, r));
+    }
+
+    @Test
+    public void circleMediumFalse() {
+        double x = r / 2 ;
+        r = 1.0;
+        double y = -r / 2;
+        assertFalse(checkArea.getHit(x, y, r));
+    }
+
+    @Test
+    public void noNameSpaceFalse () {
+        double x = -r * 0.25 ;
+        r = 1.0;
+        double y = -r * 0.25;
+        assertFalse(checkArea.getHit(x, y, r));
+    }
+
+    @Test
+    public void triangleMediumTrue() {
+        double x = r * 0.25;
+        r = 1.0;
+        double y = r * 0.25;
+        assertTrue(checkArea.getHit(x, y, r));
+    }
+
+    @Test
+    public void triangleMediumFalse() {
+        double x = r / 2;
+        r = 1.0;
+        double y = r / 2;
+        assertFalse(checkArea.getHit(x, y, r));
+    }
+
+    @Test
+    public void rectangleMediumTrue() {
+        double x = -r / 2;
+        r = 1.0;
+        double y = r / 2;
+        assertTrue(checkArea.getHit(x, y, r));
+    }
+
+    @Test
+    public void rectangleMediumFalse() {
+        double x = -r * 0.75 ;
+        r = 1.0;
+        double y = r * 0.75;
+        assertFalse(checkArea.getHit(x, y, r));
+    }
+
+
+
+
+
 
 }

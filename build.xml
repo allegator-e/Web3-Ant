@@ -32,20 +32,18 @@
         <echo>Compilation done</echo>
     </target>
 
-    <!--    Компиляция исходников проекта и упаковка в war-архив -->
+    <!--    Компиляция исходников проекта и упаковка в jar-архив -->
     <target name="build" depends="compile">
         <echo>Build project</echo>
         <mkdir dir="${out}"/>
-        <war destfile="${out}/${ant.project.name}.war" webxml="${web}">
-            <classes dir="${classes}"/>
-            <lib dir="${lib}"/>
-            <fileset dir="${main}/webapp"/>
+        <jar destfile="${out}/${ant.project.name}.jar">
+            <fileset dir="${classes}"/>
             <manifest>
-                <attribute name="Created-By" value="Web"/>
+                <attribute name="Created-By" value="JarFromWeb"/>
                 <attribute name="Manifest-Version" value="1.0"/>
-                <attribute name="Main-Class" value="NoClass"/>
+                <attribute name="Main-Class" value="Console"/>
             </manifest>
-        </war>
+        </jar>
         <echo>Build succesfull</echo>
     </target>
 
@@ -72,7 +70,7 @@
 
     <target name="scp" depends="build">
         <echo>Start sending on Helios</echo>
-        <scp file="${out}/${ant.project.name}.war"
+        <scp file="${out}/${ant.project.name}.jar"
              todir="${login}@${host}:~/WebLab3"
              password="${password}" trust="true" port="${port}"/>
     </target>
